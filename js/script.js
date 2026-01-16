@@ -310,3 +310,53 @@ function closeProjectModal() {
         setTimeout(() => modal.style.display = 'none', 300);
     }
 }
+
+// Research Data & Logic
+const researchData = {
+    title: 'Coding Battle Royale: AI-Driven Gamified Learning',
+    context: 'Published in ICICTA 2025',
+    abstract: `Digital platforms for education and competition were reimagined with the introduction of gamified learning, artificial intelligence, and real-time interaction. However, competitive programming platforms that employ conventional techniques and have a tendency to remain stagnant have not evolved much from solving problems alone with nothing in the way of live interaction. Coding Battle Royale offers a novel approach to fixing these issues by fusing multi-player gamified learning based on the battle royale genre with AI-based adaptive learning.\n\nIn the exciting and captivating atmosphere of Coding Battle Royale, programmers compete in five progressively challenging elimination rounds. AI-generated tasks tailored to each player's skill level are introduced in each of the five rounds, and the player with the lowest performance is eliminated at the end of each round. The OpenAI API-based adaptive system offers individualized, context-aware tasks that change in real time based on player performance.\n\nIn addition to being entertaining, Coding Battle Royale fosters important skills like perseverance, productivity, and strategic thinking under duress—all of which are combined with real-world coding scenarios like hackathons and tech interviews. It has enormous learning potential as well; in classroom settings, it transforms assessments into dynamic, pressure-filled assessments that fairly gauge students' capacity for problem-solving.\n\nLastly, by fusing the discipline of competitive programming with the thrill of online gaming and the knowledge of artificial intelligence, Coding Battle Royale transforms the way programmers learn, compete, and advance. It is a powerful instructional tool for future educational programming in addition to being an entertaining product that engages viewers.`
+};
+
+function openResearchModal() {
+    let modal = document.getElementById('research-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'research-modal';
+        modal.className = 'custom-modal';
+        document.body.appendChild(modal);
+
+        modal.onclick = (e) => {
+            if (e.target === modal) closeResearchModal();
+        };
+    }
+
+    // Format abstract with paragraphs
+    const formattedAbstract = researchData.abstract.split('\n\n').map(p => `<p class="modal-text" style="margin-bottom:15px; line-height:1.6; color:#ccc; text-align: justify; text-justify: inter-word;">${p}</p>`).join('');
+
+    modal.innerHTML = `
+        <div class="modal-content schematic-theme" style="max-width: 800px; width:90%;">
+            <button class="modal-close" onclick="closeResearchModal()">&times;</button>
+            <div class="modal-header">
+                <h2>${researchData.title}</h2>
+                <div class="modal-subtitle">${researchData.context}</div>
+            </div>
+            <div class="modal-body" style="align-items: flex-start; text-align: left; max-height: 70vh; overflow-y: auto;">
+                <div class="modal-info" style="width: 100%;">
+                    ${formattedAbstract}
+                </div>
+            </div>
+        </div>
+    `;
+
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('active'), 10);
+}
+
+function closeResearchModal() {
+    const modal = document.getElementById('research-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => modal.style.display = 'none', 300);
+    }
+}
