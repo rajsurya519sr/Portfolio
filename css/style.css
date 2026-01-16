@@ -805,40 +805,320 @@ main {
 }
 
 /* Tech Grid */
-.tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+/* Core Skill Hex Grid */
+.core-skills-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    perspective: 1000px;
 }
 
-.tech-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--dark-grey);
-    padding: 2rem;
+.skill-hex {
+    width: 120px;
+    height: 140px;
+    position: relative;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: rgba(10, 10, 10, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    animation: float-hex 3s ease-in-out infinite;
+    animation-delay: var(--d);
+    cursor: pointer;
+}
+
+.skill-hex::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: rgba(255, 255, 255, 0.05);
+    z-index: -1;
+}
+
+.skill-hex::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: var(--gold);
+    z-index: -2;
+    opacity: 0.3;
+    transition: 0.4s;
+}
+
+.skill-hex:hover {
+    transform: scale(1.1) translateY(-10px);
+}
+
+.skill-hex:hover::after {
+    opacity: 1;
+    box-shadow: 0 0 30px var(--gold);
+}
+
+.hex-inner {
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+
+.hex-inner i {
+    font-size: 2.5rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 5px;
+    transition: 0.4s;
+}
+
+.skill-hex:hover i {
+    color: #fff;
+    text-shadow: 0 0 10px white;
+}
+
+.hex-inner span {
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+@keyframes float-hex {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Skill Controls */
+.skill-controls {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.scan-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 1rem 2rem;
+    font-family: var(--font-tech);
+    font-size: 1rem;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
+    transition: 0.3s;
+    letter-spacing: 2px;
 }
 
-.tech-card:hover {
-    border-color: var(--gold-dim);
+.scan-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 0 5px var(--gold);
 }
 
-.tech-card i {
-    font-size: 2rem;
-    color: var(--gold);
-    margin-bottom: 1rem;
+.hidden-panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s ease-in-out;
 }
 
-.progress {
+.hidden-panel.visible {
+    display: block;
+    /* Changed to block for wrapper div */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Constructor Grid */
+.skill-circuit {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.circuit-node {
+    background: linear-gradient(180deg, rgba(15, 15, 15, 0.95) 0%, rgba(25, 25, 25, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    padding: 25px;
+    overflow: hidden;
+
+    /* Pre-animation State */
+    opacity: 0;
+    transform: scale(0.1);
+    /* Start small */
+    transform-origin: center;
+}
+
+/* Constructor Animation */
+.circuit-node.scanned {
+    animation: construct-window 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes construct-window {
+    0% {
+        opacity: 0;
+        transform: scaleX(0.05) scaleY(0.05);
+        background: var(--gold);
+        /* Flash start */
+    }
+
+    40% {
+        opacity: 1;
+        transform: scaleX(1) scaleY(0.05);
+        /* Expand width */
+        background: var(--gold);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1) scaleY(1);
+        /* Expand height */
+        background: linear-gradient(180deg, rgba(15, 15, 15, 0.95) 0%, rgba(25, 25, 25, 0.95) 100%);
+    }
+}
+
+/* Corner Brackets */
+.circuit-node::before,
+.circuit-node::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    transition: 0.4s;
+    border: 2px solid transparent;
+    z-index: 2;
+    opacity: 0.6;
+}
+
+.circuit-node::before {
+    top: 0;
+    left: 0;
+    border-top-color: var(--gold);
+    border-left-color: var(--gold);
+}
+
+.circuit-node::after {
+    bottom: 0;
+    right: 0;
+    border-bottom-color: var(--gold);
+    border-right-color: var(--gold);
+}
+
+.circuit-node:hover::before,
+.circuit-node:hover::after {
     width: 100%;
-    height: 4px;
-    background: #222;
-    margin-top: 1rem;
+    height: 100%;
+    opacity: 1;
+    z-index: 0;
+    /* Move behind text */
 }
 
-.fill {
-    height: 100%;
+.circuit-node:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+}
+
+/* Content Fade In (Delayed) */
+.circuit-node .node-head,
+.circuit-node .node-chips {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s, transform 0.4s;
+}
+
+/* When scanned, delay content appearance slightly to match window opening */
+.circuit-node.scanned .node-head {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+}
+
+.circuit-node.scanned .node-chips {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+}
+
+.node-head {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.node-head i {
+    font-size: 1.8rem;
+    color: var(--gold);
+    background: rgba(255, 255, 255, 0.05);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.node-head h3 {
+    font-family: var(--font-heading);
+    color: white;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.node-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.node-chips span {
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    color: #888;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px 10px;
+    border: none;
+    border-left: 2px solid var(--gold-dim);
+    transition: 0.3s;
+}
+
+.node-chips span:hover {
+    color: white;
+    background: var(--gold-dim);
+    border-left-color: white;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    transform: none;
+    /* Reset */
+}
+
+
+
+.circuit-node:hover .node-chips span {
+    border-color: var(--gold-dim);
+    color: white;
+}
+
+.node-chips span:hover {
     background: var(--gold);
+    border-color: var(--gold);
+    color: black;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px var(--gold);
 }
 
 /* Research */
@@ -1222,13 +1502,23 @@ main {
     .loader-msg {
         top: calc(50% + 75px);
         font-size: 0.7rem;
-        /* Small enough for single line */
         letter-spacing: 2px;
         width: 100%;
         padding: 0;
         margin: 0;
         white-space: nowrap;
-        /* Force single line */
         text-align: center;
+    }
+
+    /* Skill Circuit Mobile */
+    .circuit-node {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .node-chips {
+        max-width: 100%;
+        justify-content: flex-start;
     }
 }

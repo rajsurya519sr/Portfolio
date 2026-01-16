@@ -110,3 +110,52 @@ document.querySelectorAll('.dossier-tab').forEach(tab => {
     });
 });
 
+// Toggle Full Skills Scan
+document.getElementById('skill-toggle-btn').addEventListener('click', function () {
+    const fullList = document.getElementById('full-skills-list');
+    const coreGrid = document.getElementById('core-skills');
+    const btn = this;
+
+    // Toggle visibility
+    if (fullList.classList.contains('visible')) {
+        fullList.classList.remove('visible');
+        setTimeout(() => {
+            fullList.style.display = 'none';
+            coreGrid.style.display = 'flex';
+            // Slight delay to allow fade out
+            setTimeout(() => {
+                coreGrid.style.opacity = '1';
+                coreGrid.style.transform = 'translateY(0)';
+            }, 50);
+        }, 500);
+
+        btn.innerHTML = '<i class="fa-solid fa-expand"></i> INITIALIZE FULL SCAN';
+    } else {
+        // Hide Core Grid
+        coreGrid.style.transition = '0.5s';
+        coreGrid.style.opacity = '0';
+        coreGrid.style.transform = 'translateY(-20px)';
+
+        setTimeout(() => {
+            coreGrid.style.display = 'none';
+            fullList.style.display = 'block';
+
+            // Trigger Node Animations
+            const nodes = fullList.querySelectorAll('.circuit-node');
+            nodes.forEach((node, index) => {
+                node.classList.remove('scanned'); // Reset
+                node.style.animationDelay = `${index * 0.1}s`;
+                setTimeout(() => {
+                    node.classList.add('scanned');
+                }, 50);
+            });
+
+            // Force reflow
+            void fullList.offsetWidth;
+            fullList.classList.add('visible');
+        }, 500);
+
+        btn.innerHTML = '<i class="fa-solid fa-compress"></i> COLLAPSE DATA';
+    }
+});
+
