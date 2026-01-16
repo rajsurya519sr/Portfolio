@@ -349,6 +349,202 @@ main {
     }
 }
 
+/* Hero Layout */
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-shard {
+    flex: 1;
+    z-index: 2;
+}
+
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    animation: fade-in-vis 1.5s ease-out forwards;
+}
+
+/* Holographic Projection */
+.profile-frame {
+    width: 300px;
+    height: 400px;
+    position: relative;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* Align image to bottom emitter */
+    perspective: 1000px;
+}
+
+/* The Emitter Base */
+.profile-frame::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    width: 200px;
+    height: 20px;
+    background: radial-gradient(ellipse at center, var(--gold) 0%, rgba(212, 175, 55, 0.2) 60%, transparent 80%);
+    border-radius: 50%;
+    filter: blur(5px);
+    z-index: 1;
+    animation: pulse-emitter 2s ease-in-out infinite;
+}
+
+/* The Image Hologram */
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    /* Holo Effects */
+    filter: sepia(100%) hue-rotate(5deg) brightness(0.9) contrast(1.2) drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+    opacity: 0.85;
+    mask-image: linear-gradient(to bottom, black 0%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 85%, transparent 100%);
+    transition: 0.4s;
+    transform-origin: bottom;
+    animation: holo-flicker 4s infinite;
+}
+
+/* Scanlines */
+.profile-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: repeating-linear-gradient(0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(212, 175, 55, 0.1) 4px,
+            rgba(212, 175, 55, 0.3) 5px);
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, black 0%, black 85%, transparent 100%);
+    /* Match image mask */
+    background-size: 100% 100%;
+    opacity: 0.7;
+}
+
+/* Interaction */
+.profile-frame:hover .profile-img {
+    filter: none;
+    /* Full Color */
+    opacity: 1;
+    animation: none;
+    transform: scale(1.02);
+    drop-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+}
+
+.profile-frame:hover .profile-glow {
+    opacity: 0.1;
+    /* Fade scanlines */
+}
+
+/* Hover Data Tag */
+.hero-visual::after {
+    content: 'HOLOGRAM_LINK: STABLE';
+    position: absolute;
+    bottom: -40px;
+    color: var(--gold-dim);
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.profile-frame:hover~.hero-visual::after,
+.hero-visual:hover::after {
+    opacity: 1;
+}
+
+/* Animations */
+@keyframes holo-flicker {
+
+    0%,
+    100% {
+        opacity: 0.85;
+        transform: scale(1);
+        filter: sepia(100%) hue-rotate(5deg) brightness(0.9) blur(0.5px);
+    }
+
+    2% {
+        opacity: 0.4;
+        transform: scale(1.01) skewX(2deg);
+        filter: sepia(100%) hue-rotate(5deg) brightness(1.5);
+    }
+
+    4% {
+        opacity: 0.85;
+        transform: scale(1);
+    }
+
+    15% {
+        filter: sepia(100%) hue-rotate(5deg) brightness(0.9) blur(1px);
+    }
+
+    16% {
+        filter: sepia(100%) hue-rotate(5deg) brightness(0.9) blur(0px);
+    }
+}
+
+@keyframes pulse-emitter {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scaleX(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleX(1.1);
+        box-shadow: 0 0 20px var(--gold);
+    }
+}
+
+@keyframes fade-in-vis {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Remove unused keyframes */
+
+/* Response Update */
+@media (max-width: 900px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .hero-visual {
+        order: -1;
+        /* Image visual on top */
+        margin-bottom: 2rem;
+    }
+
+    .btn-group {
+        justify-content: center;
+    }
+}
+
 .separator {
     width: 100%;
     height: 1px;
@@ -357,11 +553,14 @@ main {
 }
 
 .hero-role {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: white;
     margin-bottom: 1rem;
-    font-weight: bold;
-    min-height: 1.6rem;
+    font-weight: 900;
+    min-height: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     /* Prevent layout shift */
 }
 
