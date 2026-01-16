@@ -93,3 +93,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start Typing
     setTimeout(typeRole, 1000);
 });
+
+// Dossier Tabs
+document.querySelectorAll('.dossier-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        document.querySelectorAll('.dossier-tab').forEach(t => t.classList.remove('active'));
+        // Add active class to clicked tab
+        tab.classList.add('active');
+
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        // Show target content
+        const target = tab.getAttribute('data-target');
+        document.getElementById(target).classList.add('active');
+    });
+});
+
