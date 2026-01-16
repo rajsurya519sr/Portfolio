@@ -1,3 +1,10 @@
+// Loader
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loader').classList.add('loaded');
+    }, 4000);
+});
+
 // Scroll spy for Hex Nav
 const sections = document.querySelectorAll('.screen-section');
 const navLinks = document.querySelectorAll('.hex-link');
@@ -38,4 +45,51 @@ navLinks.forEach(link => {
             behavior: 'smooth'
         });
     });
+});
+
+// Dynamic Role Typing Animation
+const roles = [
+    "SOFTWARE DEVELOPER",
+    "RESEARCHER",
+    "AI ENGINEER",
+    "PROBLEM SOLVER"
+];
+
+const roleText = document.getElementById("role-text");
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typeSpeed = 100;
+
+function typeRole() {
+    if (!roleText) return;
+
+    const currentRole = roles[roleIndex];
+
+    if (isDeleting) {
+        roleText.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 50; // Faster deletion
+    } else {
+        roleText.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 100; // Normal typing
+    }
+
+    if (!isDeleting && charIndex === currentRole.length) {
+        isDeleting = true;
+        typeSpeed = 2000; // Pause at end
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        typeSpeed = 500; // Pause before new word
+    }
+
+    setTimeout(typeRole, typeSpeed);
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    // Start Typing
+    setTimeout(typeRole, 1000);
 });

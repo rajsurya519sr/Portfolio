@@ -14,6 +14,15 @@
 
 <body>
 
+    <!-- Loader -->
+    <!-- Loader -->
+    <div id="loader">
+        <svg class="sr-logo" viewBox="0 0 300 150">
+            <text x="50%" y="50%" dy=".35em" text-anchor="middle" class="sr-text">SR</text>
+        </svg>
+        <h2 class="loader-msg">ESTABLISHING SECURE CONNECTION...</h2>
+    </div>
+
     <canvas id="poly-bg"></canvas>
     <div class="vignette"></div>
 
@@ -51,10 +60,9 @@
         <section id="hero" class="screen-section">
             <div class="hero-shard">
                 <div class="shard-content">
-                    <h2 class="sub-head">WELCOME TO MY PROFILE</h2>
-                    <h1 class="main-head">SURYA RAJ</h1>
+                    <h1 class="main-head" data-text="SURYA RAJ">SURYA RAJ</h1>
                     <div class="separator"></div>
-                    <p class="hero-role">SOFTWARE DEVELOPER</p>
+                    <p class="hero-role"><span id="role-text"></span><span class="cursor">|</span></p>
                     <p class="hero-bio">Passionate about building scalable software and creating great user experiences.
                         I
                         build innovative, AI-powered platforms and love solving real-world problems.</p>

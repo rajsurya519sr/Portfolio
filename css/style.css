@@ -149,6 +149,91 @@ main {
     margin-top: 10px;
 }
 
+/* Loader */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #050505;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-out, visibility 0.8s;
+}
+
+#loader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.sr-logo {
+    width: 300px;
+    height: 150px;
+    margin: 0 auto;
+    /* Removed bottom margin */
+    display: block;
+}
+
+.sr-text {
+    font-family: var(--font-heading);
+    font-size: 100px;
+    font-weight: bold;
+    fill: transparent;
+    stroke: var(--gold);
+    stroke-width: 2px;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: draw-sr 2.5s ease-in-out forwards, fill-sr 1s ease-out 2.2s forwards;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+}
+
+.loader-msg {
+    position: absolute;
+    /* Independent layer */
+    top: calc(50% + 90px);
+    /* Positioned below centered logo */
+    left: 0;
+    width: 100%;
+
+    font-family: var(--font-heading);
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-align: center;
+    /* Ensure text is centered in the absolute container */
+
+    animation: fade-up 1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    animation-delay: 2.5s;
+    /* Wait for SR to finish drawing */
+}
+
+@keyframes draw-sr {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fill-sr {
+    to {
+        fill: var(--gold);
+        stroke: transparent;
+    }
+}
+
+@keyframes fade-up {
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Hero */
 .hero-shard {
     position: relative;
@@ -156,18 +241,112 @@ main {
 }
 
 .sub-head {
-    color: var(--gold-dim);
+    color: transparent;
+    /* Hide real text but keep layout size */
     font-size: 1.2rem;
-    letter-spacing: 5px;
-    margin-bottom: 1rem;
+    letter-spacing: 3px;
+    margin: 0 0 1rem 0;
+    /* Left aligned to match name */
+    display: block;
+    width: fit-content;
+    white-space: nowrap;
+    position: relative;
+}
+
+.sub-head::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    color: var(--gold-dim);
+    overflow: hidden;
+    border-right: 2px solid var(--gold);
+    animation: typing-loop 5s steps(30, end) infinite, blink 0.75s step-end infinite;
+}
+
+@keyframes typing-loop {
+    0% {
+        width: 0;
+    }
+
+    30% {
+        width: 100%;
+    }
+
+    75% {
+        width: 100%;
+    }
+
+    /* Pause reading */
+    90% {
+        width: 0;
+    }
+
+    /* Delete */
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: var(--gold)
+    }
 }
 
 .main-head {
     font-family: var(--font-heading);
-    font-size: 5rem;
+    font-size: clamp(3rem, 10vw, 5rem);
     color: var(--gold);
     line-height: 0.9;
     margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+
+/* Shadow Spread Effect */
+.main-head::before,
+.main-head::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--gold);
+    opacity: 0.5;
+    z-index: -1;
+    animation: spread-wave 3s ease-out infinite;
+    filter: blur(2px);
+}
+
+.main-head::after {
+    animation-delay: 1.5s;
+}
+
+
+
+@keyframes spread-wave {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+        filter: blur(0px);
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+        filter: blur(8px);
+    }
 }
 
 .separator {
@@ -182,6 +361,28 @@ main {
     color: white;
     margin-bottom: 1rem;
     font-weight: bold;
+    min-height: 1.6rem;
+    /* Prevent layout shift */
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    background-color: var(--gold);
+    margin-left: 5px;
+    animation: blink-cursor 0.7s infinite;
+}
+
+@keyframes blink-cursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 .hero-bio {
@@ -208,11 +409,32 @@ main {
     transition: 0.3s;
     border: none;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.gold-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    transform: skewX(-25deg);
+    transition: 0.5s;
+    z-index: -1;
 }
 
 .gold-btn:hover {
-    background: white;
+    color: black;
     transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+}
+
+.gold-btn:hover::before {
+    left: 100%;
 }
 
 .outline-btn {
@@ -224,6 +446,33 @@ main {
     font-size: 1.1rem;
     border: 1px solid var(--gold);
     transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.outline-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gold);
+    z-index: -1;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+.outline-btn:hover {
+    color: black;
+    border-color: var(--gold);
+}
+
+.outline-btn:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .outline-btn:hover {
@@ -400,7 +649,8 @@ main {
 }
 
 .project-hex {
-    width: 320px;
+    width: 100%;
+    max-width: 350px;
     height: 480px;
     /* Increased height for image */
     background: linear-gradient(135deg, #111, #0a0a0a);
@@ -533,7 +783,7 @@ main {
 /* Research */
 .research-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
@@ -747,11 +997,134 @@ main {
         text-align: center;
     }
 
+    .sub-head {
+        margin: 0 auto 1rem auto;
+        /* Re-center on mobile */
+    }
+
     .btn-group {
         justify-content: center;
     }
 
     .bio-layout {
         grid-template-columns: 1fr;
+    }
+
+    /* Responsive Loader */
+    .sr-logo {
+        width: 200px;
+        height: 100px;
+    }
+
+    .sr-text {
+        font-size: 80px;
+    }
+
+    .loader-msg {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        padding: 0 20px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 650px) {
+    .main-head {
+        font-size: 3rem;
+    }
+
+    .screen-section {
+        padding: 4rem 5%;
+    }
+
+    .projects-hex-grid,
+    .research-list,
+    .cert-grid,
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-group {
+        flex-wrap: wrap;
+    }
+
+    .project-hex {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .uplink-interface {
+        padding: 1.5rem;
+    }
+
+    .bio-visual {
+        width: 250px;
+        height: 250px;
+    }
+
+    .image-container,
+    .tech-ring-1,
+    .tech-ring-2 {
+        transform: scale(0.8);
+    }
+
+    /* Center Alignments */
+    .section-title {
+        text-align: center;
+        border-left: none;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gold-bar {
+        margin: 10px auto 0;
+    }
+
+    .hero-bio {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bio-data {
+        text-align: center;
+    }
+
+    .stats-tri {
+        justify-content: center;
+    }
+
+    .uplink-interface {
+        margin: 0 auto;
+    }
+
+
+    .project-hex {
+        margin: 0 auto;
+    }
+
+    /* Mobile Loader Tweaks */
+    .sr-logo {
+        width: 240px;
+        height: 120px;
+        margin: 0 auto;
+    }
+
+    .sr-text {
+        font-size: 90px;
+    }
+
+    .loader-msg {
+        top: calc(50% + 75px);
+        font-size: 0.7rem;
+        /* Small enough for single line */
+        letter-spacing: 2px;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+        /* Force single line */
+        text-align: center;
     }
 }
