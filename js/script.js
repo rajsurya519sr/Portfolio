@@ -212,8 +212,8 @@ const projectData = {
         subtitle: 'AI-Powered Smart Farming Platform',
         image: 'agri_assist.png',
         stack: ['Python', 'Flask', 'SQLAlchemy', 'Leaflet.js', 'OpenStreetMap', 'Open-Meteo', 'Bcrypt'],
-        github: 'https://github.com/rajsurya519sr/AgriAssist',
-        live: '#',
+        github: 'https://github.com/rajsurya519sr/Agri_Assist',
+        live: 'https://agri-assistsr.vercel.app/',
         details: [
             'Developed a full-stack Python Flask application using SQLAlchemy for database management and Bcrypt with OTP email verification for secure user authentication.',
             'Engineered an interactive mapping module with JavaScript and Leaflet.js, enabling users to draw custom farm boundaries (polygons) with automatic area calculation.',
@@ -225,8 +225,8 @@ const projectData = {
         subtitle: 'AI-Powered Multiplayer Game',
         image: 'cbr.png',
         stack: ['React (Vite)', 'Tailwind CSS', 'Node.js', 'PostgreSQL', 'Socket.io', 'Gemini API'],
-        github: 'https://github.com/rajsurya519sr/coding-battle-royale-frontend',
-        live: '#',
+        github: 'https://github.com/rajsurya519sr/Coding-Battle-Royale',
+        live: 'deployment_pending.html?id=cbr',
         details: [
             'Built a full-stack, real-time multiplayer game using React.js (with Vite) and Tailwind CSS for the frontend, and Node.js with a PostgreSQL database for the backend.',
             'Integrated the Gemini API to dynamically generate live coding challenges and provide AI-driven feedback to players during competitive sessions.',
@@ -238,8 +238,8 @@ const projectData = {
         subtitle: 'Restaurant Dine-In Reservation Hub',
         image: 'Dine_In.png',
         stack: ['Java Swing', 'JDBC', 'MySQL', 'GUI Design'],
-        github: 'https://github.com/rajsurya519sr/Dine_In',
-        live: '#',
+        github: 'https://github.com/rajsurya519sr/Dine-In-Java-',
+        live: 'deployment_pending.html?id=dine',
         details: [
             'Developed a Java Swing desktop application to manage restaurant dine-in registrations, table assignments, and guest lists.',
             'Utilized JDBC to connect to a MySQL database, enabling all CRUD (Create, Read, Update, Delete) operations for data persistence.',

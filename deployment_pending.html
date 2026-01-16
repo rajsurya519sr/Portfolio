@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEPLOYMENT STATUS | PENDING</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            /* Allow scrolling */
+        }
+
+        #poly-bg,
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .status-container {
+            border: 1px solid var(--gold);
+            background: rgba(10, 10, 10, 0.85);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+            margin: 20px auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .status-header {
+            font-family: var(--font-heading);
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            border-bottom: 1px dashed var(--gold-dim);
+            padding-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .status-icon {
+            font-size: 3rem;
+            /* Slightly smaller base size */
+            color: var(--gold);
+            margin-bottom: 20px;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+
+        .status-msg {
+            font-family: var(--font-tech);
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .return-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-family: var(--font-tech);
+            letter-spacing: 2px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .return-btn:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            .status-container {
+                padding: 25px 15px;
+            }
+
+            .status-header {
+                font-size: 1.5rem;
+            }
+
+            .status-msg {
+                font-size: 1rem;
+            }
+
+            .status-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+        }
+
+        .corner {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid var(--gold);
+        }
+
+        .tl {
+            top: -2px;
+            left: -2px;
+            border-right: 0;
+            border-bottom: 0;
+        }
+
+        .tr {
+            top: -2px;
+            right: -2px;
+            border-left: 0;
+            border-bottom: 0;
+        }
+
+        .bl {
+            bottom: -2px;
+            left: -2px;
+            border-right: 0;
+            border-top: 0;
+        }
+
+        .br {
+            bottom: -2px;
+            right: -2px;
+            border-left: 0;
+            border-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="poly-bg"></canvas>
+    <div class="vignette"></div>
+
+    <div class="status-container">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+        <div class="status-icon">
+            <i class="fa-solid fa-gears"></i>
+        </div>
+        <div class="status-header">SYSTEM DEPLOYMENT PENDING</div>
+
+        <!-- Dynamic Project Content -->
+        <div id="project-details" style="display:none; margin-bottom: 30px;">
+            <img id="proj-img" src="" alt="Project Visual"
+                style="max-width: 100%; height: auto; border: 1px solid var(--gold); margin-bottom: 20px; max-height: 200px; object-fit: cover;">
+            <h3 id="proj-title"
+                style="color: white; font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 10px;"></h3>
+            <p id="proj-desc" style="color: #ccc; font-family: var(--font-tech); font-size: 1rem; margin-bottom: 20px;">
+            </p>
+            <a id="proj-github" href="#" target="_blank" class="return-btn"
+                style="font-size: 0.9rem; padding: 8px 20px; margin-bottom: 20px;">
+                <i class="fa-brands fa-github"></i> VIEW SOURCE CODE
+            </a>
+        </div>
+
+        <p class="status-msg" id="default-msg">
+            This module is currently in the active development or deployment phase.
+            The live uplink is not yet established.
+        </p>
+
+        <a href="index.html" class="return-btn">RETURN TO BASE</a>
+    </div>
+
+    <script src="js/background.js"></script>
+    <script>
+        // Data subset for Pending Page
+        const pendingData = {
+            'cbr': {
+                title: 'Coding Battle Royale',
+                image: 'cbr.png',
+                desc: 'A real-time competitive development environment with generative challenges (React, Node.js, Socket.io).',
+                github: 'https://github.com/rajsurya519sr/Coding-Battle-Royale'
+            },
+            'dine': {
+                title: 'Dine In',
+                image: 'Dine_In.png',
+                desc: 'High-throughput reservation logistics and table management architecture (Java Swing, MySQL).',
+                github: 'https://github.com/rajsurya519sr/Dine-In-Java-'
+            }
+        };
+
+        // Parse URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const pid = urlParams.get('id');
+
+        if (pid && pendingData[pid]) {
+            const data = pendingData[pid];
+
+            // Populate
+            document.getElementById('proj-img').src = data.image;
+            document.getElementById('proj-title').innerText = data.title;
+            document.getElementById('proj-desc').innerText = data.desc;
+            document.getElementById('proj-github').href = data.github;
+
+            // Show/Hide
+            document.getElementById('project-details').style.display = 'block';
+            document.getElementById('default-msg').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
