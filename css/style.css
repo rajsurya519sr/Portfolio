@@ -5903,25 +5903,29 @@ main {
 }
 
 /* =========================================
-   CRYSTAL GLASS CONTACT SECTION
+   CRYSTAL GLASS CONTACT SECTION (GOLD GLASS UPDATE)
    ========================================= */
 
 .crystal-contact-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
+    /* EQUAL HEIGHT */
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* LEFT SIDE: Intro */
+/* LEFT SIDE: Intro (Unchanged) */
 .contact-intro {
     flex: 1;
     max-width: 500px;
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .ci-head {
@@ -5942,12 +5946,14 @@ main {
     font-size: 1.1rem;
     color: #bbb;
     line-height: 1.7;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
+    /* Reduced from 40px */
     max-width: 90%;
 }
 
 .direct-links {
-    margin-top: 30px;
+    margin-top: 15px;
+    /* Reduced from 30px */
 }
 
 .dl-item {
@@ -5976,6 +5982,7 @@ main {
     gap: 15px;
 }
 
+/* Social Icons with Gold Tech Tooltip */
 .social-icon {
     width: 45px;
     height: 45px;
@@ -5988,8 +5995,48 @@ main {
     font-size: 1.2rem;
     text-decoration: none;
     transition: 0.3s;
+    position: relative;
+    /* For tooltip alignment */
 }
 
+/* Tooltip Body */
+.social-icon::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    font-family: var(--font-tech);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    z-index: 10;
+}
+
+/* Tooltip Arrow */
+.social-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    border: 6px solid transparent;
+    border-top-color: var(--gold);
+    opacity: 0;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    pointer-events: none;
+}
+
+/* Hover State */
 .social-icon:hover {
     background: white;
     color: black;
@@ -5997,150 +6044,282 @@ main {
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
-/* RIGHT SIDE: Crystal Form */
-.contact-form-wrapper {
+.social-icon:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.social-icon:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* RIGHT SIDE: Golden Glass Form */
+.contact-form-wrapper.gold-glass-theme {
     flex: 1.2;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 50px;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    background: rgba(255, 215, 0, 0.02);
+    /* Extremely transparent gold tint */
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    /* Keep effects contained for mobile safety */
+    transition: 0.4s ease;
 }
 
-/* Decorative Shine */
-.glass-shine {
+/* Hover Effect: Crystal Resonance (Subtle & Safe for Mobile) */
+.contact-form-wrapper.gold-glass-theme:hover {
+    background: rgba(255, 215, 0, 0.05);
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 0 20px rgba(212, 175, 55, 0.1);
+    /* Inner glow */
+}
+
+/* Sheen Effect */
+.contact-form-wrapper.gold-glass-theme::after {
+    content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg,
-            transparent 45%,
-            rgba(255, 255, 255, 0.05) 50%,
-            transparent 55%);
-    animation: shine-sweep 10s infinite;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: skewX(-20deg);
+    transition: 0.5s;
     pointer-events: none;
 }
 
-@keyframes shine-sweep {
-    0% {
-        transform: translate(-30%, -30%) rotate(0deg);
-    }
-
-    100% {
-        transform: translate(30%, 30%) rotate(0deg);
-    }
+.contact-form-wrapper.gold-glass-theme:hover::after {
+    left: 150%;
+    /* Smooth sheen pass */
+    transition: 0.7s ease-in-out;
 }
 
-.form-glow {
+/* Golden Corners: Static Pulse (No movement) */
+.gold-corner {
     position: absolute;
-    bottom: -100px;
-    right: -100px;
-    width: 300px;
-    height: 300px;
-    background: var(--gold);
-    filter: blur(150px);
-    opacity: 0.15;
-    border-radius: 50%;
-    pointer-events: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--gold);
+    transition: 0.4s ease;
+    opacity: 0.7;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-/* Form Layout */
-#crystal-form {
+.gold-corner.top-left {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+}
+
+.gold-corner.top-right {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+}
+
+.gold-corner.bottom-left {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+}
+
+.gold-corner.bottom-right {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+}
+
+.contact-form-wrapper.gold-glass-theme:hover .gold-corner {
+    opacity: 1;
+    box-shadow: 0 0 15px var(--gold);
+    /* Just glow, no movement */
+    border-color: #fff;
+}
+
+.gold-glass-structure {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     position: relative;
     z-index: 2;
 }
 
-.form-grid {
-    display: flex;
-    gap: 20px;
+.gold-header {
     margin-bottom: 20px;
 }
 
-.input-wrap {
+.gold-header h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.contact-form-wrapper.gold-glass-theme:hover .gold-header h3 {
+    letter-spacing: 4px;
+    /* Expand text */
+    text-shadow: 0 0 20px var(--gold);
+}
+
+.gold-line {
+    width: 50px;
+    height: 3px;
+    /* Slightly thicker to show sharp taper */
+    background: var(--gold);
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    /* Make right side sharp (taper to a point) */
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    filter: drop-shadow(0 0 2px var(--gold));
+}
+
+.contact-form-wrapper.gold-glass-theme:hover .gold-line {
+    width: 100%;
+    filter: drop-shadow(0 0 8px var(--gold));
+}
+
+.gold-inputs {
+    display: flex;
+    gap: 20px;
+}
+
+.gold-field {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.input-wrap.full {
+.gold-field.full {
     width: 100%;
-    margin-bottom: 20px;
 }
 
-.input-wrap label {
+.gold-field label {
+    font-family: var(--font-tech);
+    color: var(--gold);
     font-size: 0.9rem;
-    color: #aaa;
-    margin-left: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.input-wrap input,
-.input-wrap textarea {
+.gold-field input,
+.gold-field textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 15px 20px;
+    border-radius: 4px;
+    /* Slight radius for touch friendliness */
+    padding: 15px;
     color: white;
-    font-size: 1rem;
     font-family: inherit;
+    font-size: 1rem;
     transition: 0.3s;
     outline: none;
 }
 
-.input-wrap textarea {
-    min-height: 150px;
+.gold-field textarea {
+    min-height: 120px;
     resize: vertical;
 }
 
-.input-wrap input:focus,
-.input-wrap textarea:focus {
-    background: rgba(0, 0, 0, 0.5);
+.gold-field input:focus,
+.gold-field textarea:focus {
     border-color: var(--gold);
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+    background: rgba(212, 175, 55, 0.05);
 }
 
-/* Button */
-.crystal-btn {
+/* Hover over field */
+.gold-field:hover input,
+.gold-field:hover textarea {
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Button: Neon Circuit Fill */
+.gold-btn-glass {
     width: 100%;
-    padding: 18px;
-    background: linear-gradient(90deg, var(--gold), #f3e5ab);
-    border: none;
-    border-radius: 12px;
-    color: black;
+    margin-top: 10px;
+    padding: 16px 0;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--font-heading);
     font-weight: bold;
     font-size: 1.1rem;
+    letter-spacing: 2px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 15px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 4px;
 }
 
-.crystal-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+/* Background Slide Animation */
+.gold-btn-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    /* Start empty */
+    height: 100%;
+    background: var(--gold);
+    transition: cubic-bezier(0.77, 0, 0.175, 1) 0.5s;
+    z-index: -1;
 }
 
-.crystal-btn i {
-    transition: 0.3s;
+/* Icon Slide Animation */
+.gold-btn-glass i {
+    transition: transform 0.4s ease;
 }
 
-.crystal-btn:hover i {
-    transform: translateX(5px) translateY(-5px);
+.gold-btn-glass:hover {
+    color: black;
+    /* Contrast text on gold */
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+    /* Glow */
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    /* Slight lift */
+}
+
+.gold-btn-glass:hover::before {
+    width: 100%;
+    /* Fill completely */
+}
+
+.gold-btn-glass:hover i {
+    transform: translateX(10px) scale(1.2);
+    /* Move and grow icon */
 }
 
 /* Responsive */
 @media (max-width: 900px) {
     .crystal-contact-container {
         flex-direction: column;
+        align-items: center;
         gap: 40px;
         padding: 0 20px;
     }
@@ -6148,11 +6327,7 @@ main {
     .contact-intro {
         text-align: center;
         max-width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .ci-head {
-        font-size: 3rem;
+        margin-bottom: 0;
     }
 
     .dl-item {
@@ -6163,15 +6338,33 @@ main {
         justify-content: center;
     }
 
-    .contact-form-wrapper {
+    .contact-form-wrapper.gold-glass-theme {
         width: 100%;
-        padding: 40px;
+        padding: 30px 25px;
+        /* Comfortable padding */
+        min-height: auto;
+        /* Allow natural height */
+    }
+
+    .contact-form-wrapper.gold-glass-theme:hover {
+        transform: none;
+    }
+
+    .contact-form-wrapper.gold-glass-theme:hover .gold-corner {
+        /* Disable flying effect on mobile, just glow */
+        transform: none;
+        width: 15px;
+        height: 15px;
+    }
+
+    .gold-glass-structure {
+        padding: 0;
     }
 }
 
 @media (max-width: 600px) {
     .section-title h2 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     .ci-head {
@@ -6184,30 +6377,14 @@ main {
         margin-bottom: 30px;
     }
 
-    .contact-form-wrapper {
-        padding: 25px 20px;
-        border-radius: 15px;
-    }
-
-    .form-grid {
+    .gold-inputs {
         flex-direction: column;
-        gap: 15px;
-        margin-bottom: 15px;
+        gap: 20px;
     }
 
-    .input-wrap.full {
-        margin-bottom: 15px;
-    }
-
-    .input-wrap input,
-    .input-wrap textarea {
-        padding: 12px 15px;
-        font-size: 0.95rem;
-    }
-
-    .crystal-btn {
-        padding: 15px;
-        font-size: 1rem;
+    .gold-btn-glass {
+        width: 100%;
+        justify-content: center;
     }
 
     .dl-item {

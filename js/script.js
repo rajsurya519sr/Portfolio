@@ -797,25 +797,26 @@ function resetDock() {
     });
 }
 
-// Crystal Form Interactivity
+// Crystal Form Interactivity (Golden Glass)
 const crystalForm = document.getElementById('crystal-form');
 if (crystalForm) {
     crystalForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const btn = crystalForm.querySelector('.crystal-btn');
+        const btn = crystalForm.querySelector('.gold-btn-glass');
         const originalContent = btn.innerHTML;
 
         // 1. Loading
-        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> SENDING...';
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> TRANSMITTING...';
         btn.style.opacity = '0.8';
-        btn.style.cursor = 'wait';
 
         // Simulate Send
         setTimeout(() => {
             // 2. Success
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> SENT SUCCESSFULLY';
-            btn.style.background = '#39ff14'; // Bright green
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> TRANSMISSION COMPLETE';
+            btn.style.background = '#39ff14'; // Bright green for success
+            btn.style.color = 'black';
+            btn.style.borderColor = '#39ff14';
             btn.style.boxShadow = '0 0 30px #39ff14';
 
             // Clear inputs
@@ -824,10 +825,11 @@ if (crystalForm) {
             // 3. Reset
             setTimeout(() => {
                 btn.innerHTML = originalContent;
-                btn.style.background = ''; // Revert to gradient
+                btn.style.background = ''; // Revert to transp/gold hover
+                btn.style.color = '';
+                btn.style.borderColor = '';
                 btn.style.boxShadow = '';
                 btn.style.opacity = '1';
-                btn.style.cursor = 'pointer';
             }, 3000);
 
         }, 2000);
