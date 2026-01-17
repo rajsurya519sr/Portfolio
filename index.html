@@ -15,7 +15,6 @@
 <body>
 
     <!-- Loader -->
-    <!-- Loader -->
     <div id="loader">
         <svg class="sr-logo" viewBox="0 0 300 150">
             <text x="50%" y="50%" dy=".35em" text-anchor="middle" class="sr-text">SR</text>
@@ -26,7 +25,6 @@
     <canvas id="poly-bg"></canvas>
     <div class="vignette"></div>
 
-    <!-- Top Bar Removed -->
     <!-- Navigation -->
     <nav class="hex-nav">
         <a href="#hero" class="hex-link active" data-label="HOME">
@@ -554,225 +552,395 @@
             </div>
         </section>
 
-        <!-- Certifications -->
+        <!-- Certifications: Orbital Badge System -->
         <section id="certifications" class="screen-section">
             <div class="section-title">
                 <h2>CERTIFICATIONS</h2>
                 <div class="gold-bar"></div>
             </div>
-            <!-- Certifications Timeline -->
-            <div class="cert-timeline" style="max-width: 900px; margin: 0 auto; position: relative; padding: 40px 0;">
 
-                <!-- Timeline Line -->
-                <div class="timeline-line"
-                    style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); transform: translateX(-50%);">
-                </div>
+            <div class="cert-orbit-grid">
 
-                <!-- Microsoft Azure Fundamentals -->
-                <div class="cert-timeline-item"
-                    style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
-                    <div class="cert-content" style="width: 45%; text-align: right; padding-right: 30px;">
-                        <div class="cert-badge"
-                            style="display: inline-block; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3); padding: 20px 25px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-                            <i class="fa-brands fa-microsoft"
-                                style="font-size: 2rem; color: #00A4EF; margin-bottom: 10px;"></i>
-                            <h3
-                                style="color: white; font-family: var(--font-heading); font-size: 1.1rem; margin: 10px 0;">
-                                Microsoft Azure Fundamentals</h3>
-                            <span
-                                style="color: var(--gold); font-family: var(--font-tech); font-size: 0.85rem; letter-spacing: 1px;">AZ-900</span>
-                        </div>
+                <!-- Badge 1: Azure Fund -->
+                <div class="orbit-badge" style="--orbit-color: #00A4EF;">
+                    <div class="badge-ring bounce"></div>
+                    <div class="badge-core">
+                        <i class="fa-brands fa-microsoft"></i>
                     </div>
-                    <div class="timeline-dot"
-                        style="position: absolute; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: var(--gold); border: 3px solid #0a0a0a; border-radius: 50%; z-index: 2; box-shadow: 0 0 20px var(--gold);">
-                    </div>
-                    <div style="width: 45%;"></div>
-                </div>
-
-                <!-- Microsoft Azure AI -->
-                <div class="cert-timeline-item"
-                    style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
-                    <div style="width: 45%;"></div>
-                    <div class="timeline-dot"
-                        style="position: absolute; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: var(--gold); border: 3px solid #0a0a0a; border-radius: 50%; z-index: 2; box-shadow: 0 0 20px var(--gold);">
-                    </div>
-                    <div class="cert-content" style="width: 45%; padding-left: 30px;">
-                        <div class="cert-badge"
-                            style="display: inline-block; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3); padding: 20px 25px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-                            <i class="fa-solid fa-brain"
-                                style="font-size: 2rem; color: #00A4EF; margin-bottom: 10px;"></i>
-                            <h3
-                                style="color: white; font-family: var(--font-heading); font-size: 1.1rem; margin: 10px 0;">
-                                Microsoft Azure AI Fundamentals</h3>
-                            <span
-                                style="color: var(--gold); font-family: var(--font-tech); font-size: 0.85rem; letter-spacing: 1px;">AI-900</span>
-                        </div>
+                    <div class="badge-info">
+                        <h3>AZURE<br>FUNDAMENTALS</h3>
+                        <span class="badge-org">MICROSOFT</span>
+                        <div class="verified-tick"><i class="fa-solid fa-check"></i></div>
                     </div>
                 </div>
 
-                <!-- Cisco CCST -->
-                <div class="cert-timeline-item"
-                    style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
-                    <div class="cert-content" style="width: 45%; text-align: right; padding-right: 30px;">
-                        <div class="cert-badge"
-                            style="display: inline-block; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3); padding: 20px 25px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-                            <i class="fa-solid fa-shield-halved"
-                                style="font-size: 2rem; color: #1BA0D7; margin-bottom: 10px;"></i>
-                            <h3
-                                style="color: white; font-family: var(--font-heading); font-size: 1.1rem; margin: 10px 0;">
-                                Cisco Certified Support Technician</h3>
-                            <span
-                                style="color: var(--gold); font-family: var(--font-tech); font-size: 0.85rem; letter-spacing: 1px;">CCST
-                                Cybersecurity • May 2024</span>
-                        </div>
+                <!-- Badge 2: Azure AI -->
+                <div class="orbit-badge" style="--orbit-color: #00A4EF;">
+                    <div class="badge-ring"></div>
+                    <div class="badge-core">
+                        <i class="fa-solid fa-brain"></i>
                     </div>
-                    <div class="timeline-dot"
-                        style="position: absolute; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: var(--gold); border: 3px solid #0a0a0a; border-radius: 50%; z-index: 2; box-shadow: 0 0 20px var(--gold);">
-                    </div>
-                    <div style="width: 45%;"></div>
-                </div>
-
-                <!-- Full-Stack -->
-                <div class="cert-timeline-item"
-                    style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
-                    <div style="width: 45%;"></div>
-                    <div class="timeline-dot"
-                        style="position: absolute; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: var(--gold); border: 3px solid #0a0a0a; border-radius: 50%; z-index: 2; box-shadow: 0 0 20px var(--gold);">
-                    </div>
-                    <div class="cert-content" style="width: 45%; padding-left: 30px;">
-                        <div class="cert-badge"
-                            style="display: inline-block; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3); padding: 20px 25px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-                            <i class="fa-solid fa-code"
-                                style="font-size: 2rem; color: var(--gold); margin-bottom: 10px;"></i>
-                            <h3
-                                style="color: white; font-family: var(--font-heading); font-size: 1.1rem; margin: 10px 0;">
-                                Full-Stack Web Development</h3>
-                            <span
-                                style="color: var(--gold); font-family: var(--font-tech); font-size: 0.85rem; letter-spacing: 1px;">Django
-                                & Angular • Infosys</span>
-                        </div>
+                    <div class="badge-info">
+                        <h3>AZURE AI<br>FUNDAMENTALS</h3>
+                        <span class="badge-org">MICROSOFT</span>
+                        <div class="verified-tick"><i class="fa-solid fa-check"></i></div>
                     </div>
                 </div>
 
-                <!-- Gen AI -->
-                <div class="cert-timeline-item"
-                    style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
-                    <div class="cert-content" style="width: 45%; text-align: right; padding-right: 30px;">
-                        <div class="cert-badge"
-                            style="display: inline-block; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3); padding: 20px 25px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-                            <i class="fa-solid fa-wand-magic-sparkles"
-                                style="font-size: 2rem; color: #9D4EDD; margin-bottom: 10px;"></i>
-                            <h3
-                                style="color: white; font-family: var(--font-heading); font-size: 1.1rem; margin: 10px 0;">
-                                Demystifying Generative AI</h3>
-                            <span
-                                style="color: var(--gold); font-family: var(--font-tech); font-size: 0.85rem; letter-spacing: 1px;">For
-                                Leaders • Infosys</span>
-                        </div>
+                <!-- Badge 3: Cisco -->
+                <div class="orbit-badge" style="--orbit-color: #1BA0D7;">
+                    <div class="badge-ring reverse"></div>
+                    <div class="badge-core">
+                        <i class="fa-solid fa-shield-halved"></i>
                     </div>
-                    <div class="timeline-dot"
-                        style="position: absolute; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: var(--gold); border: 3px solid #0a0a0a; border-radius: 50%; z-index: 2; box-shadow: 0 0 20px var(--gold);">
-                    </div>
-                    <div style="width: 45%;"></div>
-                </div>
-
-                <!-- Java Servlets -->
-                <div class="cert-timeline-item"
-                    style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
-                    <div style="width: 45%;"></div>
-                    <div class="timeline-dot"
-                        style="position: absolute; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: var(--gold); border: 3px solid #0a0a0a; border-radius: 50%; z-index: 2; box-shadow: 0 0 20px var(--gold);">
-                    </div>
-                    <div class="cert-content" style="width: 45%; padding-left: 30px;">
-                        <div class="cert-badge"
-                            style="display: inline-block; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3); padding: 20px 25px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-                            <i class="fa-brands fa-java"
-                                style="font-size: 2rem; color: #ED8B00; margin-bottom: 10px;"></i>
-                            <h3
-                                style="color: white; font-family: var(--font-heading); font-size: 1.1rem; margin: 10px 0;">
-                                Java Servlets Advanced Training</h3>
-                            <span
-                                style="color: var(--gold); font-family: var(--font-tech); font-size: 0.85rem; letter-spacing: 1px;">Infosys
-                                Springboard</span>
-                        </div>
+                    <div class="badge-info">
+                        <h3>SUPPORT<br>TECHNICIAN</h3>
+                        <span class="badge-org">CISCO</span>
+                        <div class="verified-tick"><i class="fa-solid fa-check"></i></div>
                     </div>
                 </div>
 
-                <!-- JDBC -->
-                <div class="cert-timeline-item"
-                    style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
-                    <div class="cert-content" style="width: 45%; text-align: right; padding-right: 30px;">
-                        <div class="cert-badge"
-                            style="display: inline-block; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3); padding: 20px 25px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-                            <i class="fa-solid fa-database"
-                                style="font-size: 2rem; color: #4DB33D; margin-bottom: 10px;"></i>
-                            <h3
-                                style="color: white; font-family: var(--font-heading); font-size: 1.1rem; margin: 10px 0;">
-                                Java Database Connectivity JDBC</h3>
-                            <span
-                                style="color: var(--gold); font-family: var(--font-tech); font-size: 0.85rem; letter-spacing: 1px;">Case
-                                Study • Infosys</span>
-                        </div>
+                <!-- Badge 4: Full Stack -->
+                <div class="orbit-badge" style="--orbit-color: #d4af37;">
+                    <div class="badge-ring"></div>
+                    <div class="badge-core">
+                        <i class="fa-solid fa-code"></i>
                     </div>
-                    <div class="timeline-dot"
-                        style="position: absolute; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: var(--gold); border: 3px solid #0a0a0a; border-radius: 50%; z-index: 2; box-shadow: 0 0 20px var(--gold);">
-                    </div>
-                    <div style="width: 45%;"></div>
-                </div>
-
-                <!-- IT Specialist Cybersecurity -->
-                <div class="cert-timeline-item"
-                    style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
-                    <div style="width: 45%;"></div>
-                    <div class="timeline-dot"
-                        style="position: absolute; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: var(--gold); border: 3px solid #0a0a0a; border-radius: 50%; z-index: 2; box-shadow: 0 0 20px var(--gold);">
-                    </div>
-                    <div class="cert-content" style="width: 45%; padding-left: 30px;">
-                        <div class="cert-badge"
-                            style="display: inline-block; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3); padding: 20px 25px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-                            <i class="fa-solid fa-user-shield"
-                                style="font-size: 2rem; color: #00B7C3; margin-bottom: 10px;"></i>
-                            <h3
-                                style="color: white; font-family: var(--font-heading); font-size: 1.1rem; margin: 10px 0;">
-                                IT Specialist Cybersecurity</h3>
-                            <span
-                                style="color: var(--gold); font-family: var(--font-tech); font-size: 0.85rem; letter-spacing: 1px;">Pearson
-                                VUE • May 2024</span>
-                        </div>
+                    <div class="badge-info">
+                        <h3>FULL STACK<br>DEVELOPMENT</h3>
+                        <span class="badge-org">INFOSYS</span>
+                        <div class="verified-tick"><i class="fa-solid fa-check"></i></div>
                     </div>
                 </div>
 
-                <!-- Mobile Responsive Styles -->
-                <style>
-                    @media (max-width: 768px) {
-                        .cert-timeline-item {
-                            flex-direction: column !important;
-                        }
+                <!-- Badge 5: Gen AI -->
+                <div class="orbit-badge" style="--orbit-color: #9D4EDD;">
+                    <div class="badge-ring bounce"></div>
+                    <div class="badge-core">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div class="badge-info">
+                        <h3>GENERATIVE<br>AI LEADERS</h3>
+                        <span class="badge-org">INFOSYS</span>
+                        <div class="verified-tick"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                </div>
 
-                        .cert-timeline-item .cert-content {
-                            width: 100% !important;
-                            text-align: center !important;
-                            padding: 0 20px !important;
-                            margin-bottom: 20px;
-                        }
+                <!-- Badge 6: Java -->
+                <div class="orbit-badge" style="--orbit-color: #ED8B00;">
+                    <div class="badge-ring reverse"></div>
+                    <div class="badge-core">
+                        <i class="fa-brands fa-java"></i>
+                    </div>
+                    <div class="badge-info">
+                        <h3>ADVANCED<br>SERVLETS</h3>
+                        <span class="badge-org">SPRINGBOARD</span>
+                        <div class="verified-tick"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                </div>
 
-                        .timeline-line {
-                            left: 20px !important;
-                        }
+                <!-- Badge 7: JDBC -->
+                <div class="orbit-badge" style="--orbit-color: #4DB33D;">
+                    <div class="badge-ring"></div>
+                    <div class="badge-core">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div class="badge-info">
+                        <h3>JDBC<br>CONNECTIVITY</h3>
+                        <span class="badge-org">INFOSYS</span>
+                        <div class="verified-tick"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                </div>
 
-                        .timeline-dot {
-                            left: 20px !important;
-                        }
-                    }
+                <!-- Badge 8: IT Specialist -->
+                <div class="orbit-badge" style="--orbit-color: #00B7C3;">
+                    <div class="badge-ring bounce"></div>
+                    <div class="badge-core">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div class="badge-info">
+                        <h3>IT SPECIALIST<br>AGENCY</h3>
+                        <span class="badge-org">PEARSON</span>
+                        <div class="verified-tick"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                </div>
 
-                    .cert-badge:hover {
-                        transform: scale(1.05);
-                        box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
-                        border-color: var(--gold);
-                        transition: all 0.3s ease;
-                    }
-                </style>
             </div>
+
+            <!-- Background Decoration -->
+            <div class="cert-grid-bg"></div>
+
+            <style>
+                #certifications {
+                    position: relative;
+                    overflow: hidden;
+                    padding-bottom: 80px;
+                }
+
+                .cert-grid-bg {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image:
+                        radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+                    background-size: 30px 30px, 100px 100px;
+                    pointer-events: none;
+                    z-index: 0;
+                    opacity: 0.4;
+                    mask-image: radial-gradient(circle at center, black, transparent 80%);
+                    -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+                }
+
+                .cert-orbit-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                    gap: 60px 40px;
+                    max-width: 1300px;
+                    margin: 0 auto;
+                    padding: 60px 20px;
+                    justify-content: center;
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .orbit-badge {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    position: relative;
+                    cursor: pointer;
+                    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    animation: float-badge 6s ease-in-out infinite;
+                }
+
+                .orbit-badge:nth-child(even) {
+                    animation-delay: 1.5s;
+                }
+
+                .orbit-badge:nth-child(3n) {
+                    animation-delay: 0.8s;
+                }
+
+                @keyframes float-badge {
+
+                    0%,
+                    100% {
+                        transform: translateY(0);
+                    }
+
+                    50% {
+                        transform: translateY(-10px);
+                    }
+                }
+
+                .orbit-badge:hover {
+                    animation-play-state: paused;
+                    transform: translateY(-15px) scale(1.05);
+                    z-index: 10;
+                }
+
+                .badge-core {
+                    width: 110px;
+                    height: 110px;
+                    background: radial-gradient(circle at 30% 30%, rgba(40, 40, 40, 0.9), rgba(10, 10, 10, 0.95));
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 3.5rem;
+                    color: var(--orbit-color);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    z-index: 2;
+                    transition: all 0.5s ease;
+                    box-shadow:
+                        0 15px 35px rgba(0, 0, 0, 0.4),
+                        inset 0 0 20px rgba(0, 0, 0, 0.8),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+                    position: relative;
+                }
+
+                .badge-core::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    border-radius: 50%;
+                    box-shadow: inset 0 0 30px var(--orbit-color);
+                    opacity: 0.15;
+                    transition: 0.5s;
+                }
+
+                .orbit-badge:hover .badge-core {
+                    color: white;
+                    background: var(--orbit-color);
+                    box-shadow:
+                        0 0 60px var(--orbit-color),
+                        0 0 20px rgba(255, 255, 255, 0.4);
+                    border-color: transparent;
+                }
+
+                .orbit-badge:hover .badge-core::after {
+                    opacity: 0.5;
+                }
+
+                .badge-ring {
+                    position: absolute;
+                    top: -20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 150px;
+                    height: 150px;
+                    border: 1px dashed rgba(255, 255, 255, 0.15);
+                    border-top: 2px solid var(--orbit-color);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                    border-radius: 50%;
+                    animation: spin-slow 20s linear infinite;
+                    transition: 0.5s;
+                    opacity: 0.6;
+                }
+
+                .badge-ring.reverse {
+                    animation-direction: reverse;
+                }
+
+                .badge-ring.bounce {
+                    animation-duration: 25s;
+                }
+
+                .orbit-badge:hover .badge-ring {
+                    border: 2px solid var(--orbit-color);
+                    border-top-color: white;
+                    width: 170px;
+                    height: 170px;
+                    top: -30px;
+                    animation-duration: 4s;
+                    opacity: 0.9;
+                    box-shadow: 0 0 20px var(--orbit-color);
+                }
+
+                @keyframes spin-slow {
+                    to {
+                        transform: translateX(-50%) rotate(360deg);
+                    }
+                }
+
+                .badge-info {
+                    margin-top: 50px;
+                    text-align: center;
+                    position: relative;
+                    transition: 0.3s;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .badge-info h3 {
+                    font-family: var(--font-heading);
+                    font-size: 1.1rem;
+                    color: rgba(255, 255, 255, 0.95);
+                    margin-bottom: 12px;
+                    letter-spacing: 1.5px;
+                    line-height: 1.4;
+                    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+                }
+
+                .badge-org {
+                    font-family: var(--font-tech);
+                    font-size: 0.75rem;
+                    color: var(--orbit-color);
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    background: rgba(0, 0, 0, 0.6);
+                    backdrop-filter: blur(4px);
+                    padding: 6px 16px;
+                    border-radius: 20px;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    transition: 0.3s;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+                }
+
+                .orbit-badge:hover .badge-org {
+                    background: var(--orbit-color);
+                    color: black;
+                    font-weight: 800;
+                    box-shadow: 0 0 25px var(--orbit-color);
+                    border-color: var(--orbit-color);
+                }
+
+                .verified-tick {
+                    position: absolute;
+                    top: -150px;
+                    right: -50px;
+                    width: 35px;
+                    height: 35px;
+                    background: #fff;
+                    color: var(--orbit-color);
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.2rem;
+                    opacity: 0;
+                    transform: scale(0) rotate(-45deg);
+                    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    box-shadow: 0 0 20px white;
+                    z-index: 20;
+                }
+
+                .orbit-badge:hover .verified-tick {
+                    opacity: 1;
+                    transform: scale(1) rotate(0deg);
+                }
+
+                /* Responsive Adjustments */
+                @media (max-width: 992px) {
+                    .cert-orbit-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 50px 30px;
+                    }
+                }
+
+                @media (max-width: 600px) {
+                    .cert-orbit-grid {
+                        grid-template-columns: 1fr;
+                        gap: 70px 20px;
+                    }
+
+                    .badge-core {
+                        width: 100px;
+                        height: 100px;
+                        font-size: 2.5rem;
+                    }
+
+                    .badge-ring {
+                        width: 130px;
+                        height: 130px;
+                        top: -15px;
+                    }
+
+                    .orbit-badge:hover .badge-ring {
+                        width: 150px;
+                        height: 150px;
+                        top: -25px;
+                    }
+
+                    .badge-info {
+                        margin-top: 40px;
+                    }
+
+                    .verified-tick {
+                        top: -120px;
+                        right: -20px;
+                        width: 30px;
+                        height: 30px;
+                        font-size: 1rem;
+                    }
+                }
+            </style>
         </section>
 
         <!-- Education -->
