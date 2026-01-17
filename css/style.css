@@ -5513,3 +5513,713 @@ main {
         font-size: 1.6rem;
     }
 }
+
+/* =========================================
+   HOLOGRAPHIC COMMAND TERMINAL (Contact Section)
+   ========================================= */
+
+.holo-terminal-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    perspective: 1500px;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Background Grid Setup */
+.terminal-grid-bg {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image:
+        linear-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: perspective(500px) rotateX(60deg);
+    z-index: -1;
+    opacity: 0.5;
+    pointer-events: none;
+    animation: grid-scroll 20s linear infinite;
+}
+
+@keyframes grid-scroll {
+    from {
+        transform: perspective(500px) rotateX(60deg) translateY(0);
+    }
+
+    to {
+        transform: perspective(500px) rotateX(60deg) translateY(50px);
+    }
+}
+
+/* TERMINAL MAIN UNIT */
+.holo-terminal {
+    flex: 1;
+    min-width: 350px;
+    max-width: 700px;
+    background: rgba(10, 10, 12, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-top: 2px solid var(--gold);
+    border-radius: 8px;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(212, 175, 55, 0.1),
+        inset 0 0 60px rgba(0, 0, 0, 0.8);
+    transform: rotateX(5deg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.holo-terminal:hover,
+.holo-terminal:focus-within {
+    transform: rotateX(0deg) translateY(-5px);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.7),
+        0 0 20px rgba(212, 175, 55, 0.15),
+        inset 0 0 40px rgba(0, 0, 0, 0.8);
+    border-color: var(--gold);
+}
+
+/* Terminal Header */
+.terminal-header {
+    background: rgba(20, 20, 20, 0.95);
+    padding: 15px 25px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-lights {
+    display: flex;
+    gap: 8px;
+}
+
+.light {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #333;
+}
+
+.light.red {
+    background: #ff5f56;
+    box-shadow: 0 0 5px #ff5f56;
+}
+
+.light.yellow {
+    background: #ffbd2e;
+    box-shadow: 0 0 5px #ffbd2e;
+}
+
+.light.green {
+    background: #27c93f;
+    box-shadow: 0 0 5px #27c93f;
+}
+
+.terminal-title {
+    font-family: var(--font-tech);
+    color: var(--gold);
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.connection-status {
+    font-family: var(--font-tech);
+    color: #39ff14;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+}
+
+/* Terminal Body */
+.terminal-body {
+    padding: 40px;
+    position: relative;
+}
+
+/* Scan Line Animation */
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    animation: scan-vertical 3s linear infinite;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+@keyframes scan-vertical {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* Form Styles */
+.holo-group {
+    position: relative;
+    margin-bottom: 35px;
+}
+
+.holo-group input,
+.holo-group textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 0;
+    color: white;
+    font-family: var(--font-tech);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.holo-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.holo-group label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: #888;
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+/* Focus States */
+.holo-group input:focus,
+.holo-group input:not(:placeholder-shown),
+.holo-group textarea:focus,
+.holo-group textarea:not(:placeholder-shown) {
+    border-bottom-color: transparent;
+}
+
+.holo-group input:focus~label,
+.holo-group input:not(:placeholder-shown)~label,
+.holo-group textarea:focus~label,
+.holo-group textarea:not(:placeholder-shown)~label {
+    top: -20px;
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Animated Border Line */
+.input-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: 0.4s ease;
+    box-shadow: 0 0 10px var(--gold);
+}
+
+.holo-group input:focus~.input-border,
+.holo-group textarea:focus~.input-border {
+    width: 100%;
+}
+
+/* Transmit Button */
+.transmit-btn {
+    width: 100%;
+    padding: 18px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.transmit-btn:hover {
+    background: var(--gold);
+    color: black;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+    letter-spacing: 5px;
+}
+
+.transmit-btn i {
+    margin-right: 10px;
+}
+
+/* Form Footer */
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    color: #555;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+}
+
+.form-footer span i {
+    margin-right: 5px;
+    color: var(--gold-dim);
+}
+
+/* CONTACT SHARDS (Right Side) */
+.contact-shards {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-top: 20px;
+}
+
+.shard {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 30px;
+    width: 320px;
+    text-decoration: none;
+    transition: 0.4s;
+    position: relative;
+    transform: translateZ(20px);
+}
+
+.shard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: 0.3s;
+    transform-origin: bottom;
+}
+
+.shard:hover {
+    transform: translateZ(50px) translateX(-10px);
+    background: rgba(30, 30, 30, 0.9);
+    border-color: var(--gold);
+    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.shard:hover::before {
+    transform: scaleY(1);
+}
+
+.shard-icon {
+    font-size: 2rem;
+    color: #666;
+    transition: 0.3s;
+}
+
+.shard:hover .shard-icon {
+    color: var(--gold);
+    text-shadow: 0 0 10px var(--gold);
+}
+
+.shard-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.shard-label {
+    font-family: var(--font-tech);
+    color: #888;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+.shard-val {
+    font-family: var(--font-tech);
+    color: white;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .holo-terminal-container {
+        flex-direction: column;
+        align-items: center;
+        perspective: none;
+        gap: 40px;
+    }
+
+    .holo-terminal {
+        width: 100%;
+        transform: none !important;
+        /* Flatten on mobile */
+        max-width: 500px;
+    }
+
+    .terminal-grid-bg {
+        display: none;
+        /* Heavy performance save on mobile */
+    }
+
+    .contact-shards {
+        width: 100%;
+        align-items: center;
+    }
+
+    .shard {
+        width: 100%;
+        max-width: 500px;
+        transform: none !important;
+    }
+}
+
+/* =========================================
+   CRYSTAL GLASS CONTACT SECTION
+   ========================================= */
+
+.crystal-contact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* LEFT SIDE: Intro */
+.contact-intro {
+    flex: 1;
+    max-width: 500px;
+    position: relative;
+    z-index: 2;
+}
+
+.ci-head {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.ci-head .highlight {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.ci-sub {
+    font-size: 1.1rem;
+    color: #bbb;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 90%;
+}
+
+.direct-links {
+    margin-top: 30px;
+}
+
+.dl-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    transition: 0.3s;
+    width: fit-content;
+    padding: 10px 20px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 50px;
+}
+
+.dl-item:hover {
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    transform: translateX(10px);
+}
+
+.dl-socials {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    background: white;
+    color: black;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* RIGHT SIDE: Crystal Form */
+.contact-form-wrapper {
+    flex: 1.2;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 50px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+/* Decorative Shine */
+.glass-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 45%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 55%);
+    animation: shine-sweep 10s infinite;
+    pointer-events: none;
+}
+
+@keyframes shine-sweep {
+    0% {
+        transform: translate(-30%, -30%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(30%, 30%) rotate(0deg);
+    }
+}
+
+.form-glow {
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: var(--gold);
+    filter: blur(150px);
+    opacity: 0.15;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Form Layout */
+#crystal-form {
+    position: relative;
+    z-index: 2;
+}
+
+.form-grid {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.input-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-wrap.full {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-wrap label {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-left: 10px;
+}
+
+.input-wrap input,
+.input-wrap textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px 20px;
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: 0.3s;
+    outline: none;
+}
+
+.input-wrap textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.input-wrap input:focus,
+.input-wrap textarea:focus {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+/* Button */
+.crystal-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(90deg, var(--gold), #f3e5ab);
+    border: none;
+    border-radius: 12px;
+    color: black;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.crystal-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+.crystal-btn i {
+    transition: 0.3s;
+}
+
+.crystal-btn:hover i {
+    transform: translateX(5px) translateY(-5px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .crystal-contact-container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 0 20px;
+    }
+
+    .contact-intro {
+        text-align: center;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .ci-head {
+        font-size: 3rem;
+    }
+
+    .dl-item {
+        margin: 0 auto 25px auto;
+    }
+
+    .dl-socials {
+        justify-content: center;
+    }
+
+    .contact-form-wrapper {
+        width: 100%;
+        padding: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .section-title h2 {
+        font-size: 2rem;
+    }
+
+    .ci-head {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+    }
+
+    .ci-sub {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .contact-form-wrapper {
+        padding: 25px 20px;
+        border-radius: 15px;
+    }
+
+    .form-grid {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .input-wrap.full {
+        margin-bottom: 15px;
+    }
+
+    .input-wrap input,
+    .input-wrap textarea {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+
+    .crystal-btn {
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    .dl-item {
+        font-size: 1rem;
+        padding: 8px 16px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}

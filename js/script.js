@@ -797,7 +797,98 @@ function resetDock() {
     });
 }
 
-// Randomize Orbit Badge Floating Animation
+// Crystal Form Interactivity
+const crystalForm = document.getElementById('crystal-form');
+if (crystalForm) {
+    crystalForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const btn = crystalForm.querySelector('.crystal-btn');
+        const originalContent = btn.innerHTML;
+
+        // 1. Loading
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> SENDING...';
+        btn.style.opacity = '0.8';
+        btn.style.cursor = 'wait';
+
+        // Simulate Send
+        setTimeout(() => {
+            // 2. Success
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> SENT SUCCESSFULLY';
+            btn.style.background = '#39ff14'; // Bright green
+            btn.style.boxShadow = '0 0 30px #39ff14';
+
+            // Clear inputs
+            crystalForm.reset();
+
+            // 3. Reset
+            setTimeout(() => {
+                btn.innerHTML = originalContent;
+                btn.style.background = ''; // Revert to gradient
+                btn.style.boxShadow = '';
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            }, 3000);
+
+        }, 2000);
+    });
+}
+
+// Holo-Terminal Interactivity (Contact Form)
+const holoForm = document.getElementById('holo-contact-form');
+if (holoForm) {
+    holoForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const btn = holoForm.querySelector('.transmit-btn');
+        const btnContent = btn.querySelector('.btn-content');
+        const originalContent = btnContent.innerHTML;
+
+        // 1. Processing State
+        btnContent.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ENCRYPTING & TRANSMITTING...';
+        btn.style.opacity = '0.8';
+        btn.style.cursor = 'wait';
+
+        // Simulate Network Request
+        setTimeout(() => {
+            // 2. Success State
+            btnContent.innerHTML = '<i class="fa-solid fa-check"></i> TRANSMISSION COMPLETE';
+            btn.style.background = '#39ff14';
+            btn.style.color = 'black';
+            btn.style.borderColor = '#39ff14';
+            btn.style.boxShadow = '0 0 30px #39ff14';
+
+            // Clear inputs
+            holoForm.reset();
+
+            // 3. Revert after delay
+            setTimeout(() => {
+                btnContent.innerHTML = originalContent;
+                btn.style.background = ''; // Revert to CSS default
+                btn.style.color = '';
+                btn.style.borderColor = '';
+                btn.style.boxShadow = '';
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            }, 3000);
+
+        }, 2000);
+    });
+}
+
+// Add random glitch effect to terminal occasionally
+function triggerGlitch() {
+    const terminal = document.querySelector('.holo-terminal');
+    if (!terminal) return;
+
+    if (Math.random() > 0.95) { // 5% chance per tick
+        terminal.style.transform = `rotateX(5deg) translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+        setTimeout(() => {
+            terminal.style.transform = 'rotateX(5deg)'; // Reset
+        }, 100);
+    }
+}
+setInterval(triggerGlitch, 2000);
 document.querySelectorAll('.orbit-badge').forEach((badge) => {
     const randomDelay = Math.random() * 5; // 0 to 5s delay
     badge.style.animationDelay = `${randomDelay}s`;

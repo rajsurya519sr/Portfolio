@@ -1004,29 +1004,63 @@
         <!-- Contact Me -->
         <section id="contact" class="screen-section">
             <div class="section-title">
-                <h2>CONTACT ME</h2>
+                <h2>CONTACT</h2>
                 <div class="gold-bar"></div>
             </div>
-            <div class="uplink-interface">
-                <p class="form-header">GET IN TOUCH</p>
-                <form>
-                    <div class="input-group">
-                        <label>Your Name</label>
-                        <input type="text" placeholder="Enter your name">
+
+            <div class="crystal-contact-container">
+                <!-- Left Side: Invitation Text -->
+                <div class="contact-intro">
+                    <h1 class="ci-head">Let's Create<br>Something <span class="highlight">Iconic</span>.</h1>
+                    <p class="ci-sub">
+                        Have a project in mind or just want to say hi? I'm always open to discussing new ideas,
+                        opportunities, and cutting-edge collaborations.
+                    </p>
+
+                    <div class="direct-links">
+                        <a href="mailto:rajsurya519sr@gmail.com" class="dl-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>rajsurya519sr@gmail.com</span>
+                        </a>
+                        <div class="dl-socials">
+                            <a href="#" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label>Your Email</label>
-                        <input type="email" placeholder="Enter your email">
-                    </div>
-                    <div class="input-group">
-                        <label>Message</label>
-                        <textarea placeholder="How can I help you?"></textarea>
-                    </div>
-                    <button class="gold-btn full">Send Message</button>
-                    <div class="contact-info-row">
-                        <span><i class="fa-solid fa-envelope"></i> rajsurya519sr@gmail.com</span>
-                    </div>
-                </form>
+                </div>
+
+                <!-- Right Side: The Crystal Form -->
+                <div class="contact-form-wrapper">
+                    <form id="crystal-form">
+                        <div class="form-grid">
+                            <div class="input-wrap">
+                                <label>Name</label>
+                                <input type="text" name="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="input-wrap">
+                                <label>Email</label>
+                                <input type="email" name="email" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        <div class="input-wrap full">
+                            <label>Subject</label>
+                            <input type="text" name="subject" placeholder="Project Inquiry" required>
+                        </div>
+                        <div class="input-wrap full">
+                            <label>Message</label>
+                            <textarea name="message" placeholder="Tell me about your project..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="crystal-btn">
+                            SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+
+                    <!-- Decorative Elements -->
+                    <div class="glass-shine"></div>
+                    <div class="form-glow"></div>
+                </div>
             </div>
         </section>
 
