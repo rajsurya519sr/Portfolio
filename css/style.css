@@ -5312,21 +5312,26 @@ main {
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     transform: scale(0.95);
-    transition: 0.3s;
+    transition: all 0.5s ease-out;
+    /* Base transition */
     width: 100%;
     max-width: 700px;
+    /* Apply zoom-out animation when not hovered */
+    /* Base Float Animation */
     animation: card-float 4s ease-in-out infinite;
     overflow: hidden;
     /* For scan line */
 }
 
 /* Hover state stops float and scales up */
+/* Hover state stops float and scales up */
 .gate-card:hover {
-    transform: scale(1);
+    transform: scale(1.05);
+    /* Transition smoothly handles this */
     box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
     border-color: rgba(212, 175, 55, 0.4);
-    animation: none;
-    /* Pause float on hover for stability */
+    animation-play-state: paused;
+    /* Pause float so it doesn't jump */
 }
 
 @keyframes card-float {
@@ -6726,5 +6731,177 @@ main {
         flex-direction: column;
         gap: 15px;
         text-align: center;
+    }
+}
+
+/* =========================================
+   PLASMA NODE DOCK (Independent Floating)
+   ========================================= */
+
+/* =========================================
+   HERO SOCIAL DOCK (Absolute within Hero)
+   ========================================= */
+
+.hero-social-dock {
+    position: absolute;
+    /* Changed from fixed */
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    z-index: 100;
+    /* Lower z-index than fixed, but above hero bg */
+    pointer-events: none;
+}
+
+/* Invisible Container */
+.dock-links {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    /* Large gap for independence */
+    pointer-events: auto;
+    /* Re-enable for links */
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+/* Remove spine decorations */
+.dock-links::before {
+    display: none;
+}
+
+/* Independent Nodes */
+.dock-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(10, 10, 10, 0.4);
+    /* Minimal background */
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    /* Faint gold ring */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--gold);
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+/* Pulse Animation for "Alive" feel */
+.dock-icon::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    /* Ring outside */
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: 0.4s;
+    background: transparent;
+    width: auto;
+    height: auto;
+    right: auto;
+    top: auto;
+}
+
+/* Hover Effects */
+.dock-icon:hover {
+    transform: scale(1.2);
+    background: var(--gold);
+    color: black;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+    border-color: transparent;
+}
+
+.dock-icon:hover::before {
+    transform: scale(1.5);
+    opacity: 0;
+    /* Ping effect */
+    animation: ping-ring 1s infinite;
+}
+
+@keyframes ping-ring {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+        border-width: 2px;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+        border-width: 0px;
+    }
+}
+
+/* Tooltip: Floating Label - Redefining :after */
+.dock-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 60px;
+    /* Far to left */
+    top: 50%;
+    transform: translateY(-50%) translateX(20px);
+    background: transparent;
+    color: var(--gold);
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    text-shadow: 0 0 5px black;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    z-index: 5;
+    border: none;
+}
+
+.dock-icon:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    width: auto;
+    right: 60px;
+}
+
+/* Mobile Responsive */
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .hero-social-dock {
+        right: 15px;
+        top: 35%;
+        /* Approximate bottom right of image area */
+        bottom: auto;
+        transform: translateY(-50%);
+    }
+
+    .dock-links {
+        gap: 15px;
+        /* Tighter gap on mobile */
+    }
+
+    .dock-icon {
+        width: 35px;
+        /* Slightly smaller for mobile */
+        height: 35px;
+        font-size: 0.9rem;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    /* Hide tooltips on mobile to prevent clutter */
+    .dock-icon::after {
+        display: none;
     }
 }
