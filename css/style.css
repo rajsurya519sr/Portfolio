@@ -6905,3 +6905,17 @@ main {
         display: none;
     }
 }
+
+/* =========================================
+   SCROLL TRIGGER ANIMATION UTILITIES
+   ========================================= */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.scroll-animate.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}

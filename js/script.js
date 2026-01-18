@@ -24,6 +24,27 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.classList.add('visible');
             entry.target.style.opacity = 1;
             entry.target.style.transform = "translateY(0)";
+
+            // Trigger internal animations
+            const animatableElements = entry.target.querySelectorAll('.scroll-animate');
+            animatableElements.forEach((el, index) => {
+                setTimeout(() => {
+                    // Only animate in if parent is still visible (avoids race condition if quick scroll)
+                    if (entry.target.classList.contains('visible')) {
+                        el.classList.add('animate-in');
+                    }
+                }, index * 100); // Stagger effect
+            });
+        } else {
+            // RESET animations for replay (Vice Versa)
+            entry.target.classList.remove('visible');
+            entry.target.style.opacity = 0;
+            entry.target.style.transform = "translateY(50px)";
+
+            const animatableElements = entry.target.querySelectorAll('.scroll-animate');
+            animatableElements.forEach(el => {
+                el.classList.remove('animate-in');
+            });
         }
     });
 
