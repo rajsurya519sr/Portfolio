@@ -726,7 +726,7 @@ function updateCarousel() {
     // We need map index -> key
     const keys = Object.keys(certData);
     const key = keys[carouselIndex];
-    if (key && certData[key]) {
+    if (key && certData[key] && infoTitle && infoDesc) {
         infoTitle.textContent = certData[key].title;
         infoDesc.textContent = certData[key].desc;
     }
@@ -818,42 +818,69 @@ function resetDock() {
     });
 }
 
-// Crystal Form Interactivity (Golden Glass)
+// Crystal Form Interactivity (Golden Glass) with EmailJS
 const crystalForm = document.getElementById('crystal-form');
 if (crystalForm) {
-    crystalForm.addEventListener('submit', (e) => {
+    crystalForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const btn = crystalForm.querySelector('.gold-btn-glass');
         const originalContent = btn.innerHTML;
 
-        // 1. Loading
-        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> TRANSMITTING...';
+        // Loading State
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> SENDING...';
         btn.style.opacity = '0.8';
+        btn.disabled = true;
 
-        // Simulate Send
+        try {
+            // Replace these with your actual IDs from EmailJS
+            const serviceID = 'service_msv6sdk';
+            const templateID = 'template_j36z9mo';
+
+            // Construct payload manually to avoid 422 errors from form parsing
+            const params = {
+                name: crystalForm.querySelector('input[name="name"]').value,
+                email: crystalForm.querySelector('input[name="email"]').value,
+                message: crystalForm.querySelector('textarea[name="message"]').value
+            };
+
+            // Send via EmailJS (using send instead of sendForm for better control)
+            const response = await emailjs.send(serviceID, templateID, params);
+
+            if (response.status === 200) {
+                // Success State
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> MESSAGE SENT';
+                btn.style.background = '#39ff14';
+                btn.style.color = 'black';
+                btn.style.borderColor = '#39ff14';
+                btn.style.boxShadow = '0 0 30px #39ff14';
+
+                crystalForm.reset();
+            } else {
+                throw new Error('EmailJS returned status ' + response.status);
+            }
+        } catch (error) {
+            console.error("Transmission Error:", error);
+            // Show more specific error in console if available
+            if (error.text) console.error("EmailJS Error Details:", error.text);
+
+            btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> ERROR';
+            btn.style.background = '#ff3333';
+            btn.style.color = 'white';
+            btn.style.borderColor = '#ff3333';
+            btn.style.boxShadow = '0 0 20px #ff3333';
+        }
+
+        // Reset Button
         setTimeout(() => {
-            // 2. Success
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> TRANSMISSION COMPLETE';
-            btn.style.background = '#39ff14'; // Bright green for success
-            btn.style.color = 'black';
-            btn.style.borderColor = '#39ff14';
-            btn.style.boxShadow = '0 0 30px #39ff14';
-
-            // Clear inputs
-            crystalForm.reset();
-
-            // 3. Reset
-            setTimeout(() => {
-                btn.innerHTML = originalContent;
-                btn.style.background = ''; // Revert to transp/gold hover
-                btn.style.color = '';
-                btn.style.borderColor = '';
-                btn.style.boxShadow = '';
-                btn.style.opacity = '1';
-            }, 3000);
-
-        }, 2000);
+            btn.innerHTML = originalContent;
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+            btn.style.boxShadow = '';
+            btn.style.opacity = '1';
+            btn.disabled = false;
+        }, 4000);
     });
 }
 
