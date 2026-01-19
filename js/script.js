@@ -835,30 +835,43 @@ if (crystalForm) {
         try {
             // Replace these with your actual IDs from EmailJS
             const serviceID = 'service_msv6sdk';
-            const templateID = 'template_j36z9mo';
+            const userTemplateID = 'template_j36z9mo'; // Auto-Reply to User
+            const adminTemplateID = 'template_4kwf7mk'; // Admin Notification
+
+            // Get current date for the admin template
+            const date = new Date().toLocaleString();
 
             // Construct payload manually to avoid 422 errors from form parsing
+            // Note: We're passing 'date' as an extra parameter
             const params = {
                 name: crystalForm.querySelector('input[name="name"]').value,
                 email: crystalForm.querySelector('input[name="email"]').value,
-                message: crystalForm.querySelector('textarea[name="message"]').value
+                message: crystalForm.querySelector('textarea[name="message"]').value,
+                date: date
             };
 
-            // Send via EmailJS (using send instead of sendForm for better control)
-            const response = await emailjs.send(serviceID, templateID, params);
+            // Send both emails simultaneously
+            // 1. Auto-Reply to User
+            const sendUser = emailjs.send(serviceID, userTemplateID, params);
 
-            if (response.status === 200) {
-                // Success State
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> MESSAGE SENT';
-                btn.style.background = '#39ff14';
-                btn.style.color = 'black';
-                btn.style.borderColor = '#39ff14';
-                btn.style.boxShadow = '0 0 30px #39ff14';
+            // 2. Notification to Admin
+            const sendAdmin = emailjs.send(serviceID, adminTemplateID, params);
 
-                crystalForm.reset();
-            } else {
-                throw new Error('EmailJS returned status ' + response.status);
-            }
+            // Wait for both
+            await Promise.all([sendUser, sendAdmin]);
+
+            // If we get here, at least one (likely both) succeeded. 
+            // In a strict sense, Promise.all fails if ANY fail.
+            // This is good because if the admin doesn't get the mail, it's an error.
+
+            // Success State
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> MESSAGE SENT';
+            btn.style.background = '#39ff14';
+            btn.style.color = 'black';
+            btn.style.borderColor = '#39ff14';
+            btn.style.boxShadow = '0 0 30px #39ff14';
+
+            crystalForm.reset();
         } catch (error) {
             console.error("Transmission Error:", error);
             // Show more specific error in console if available
