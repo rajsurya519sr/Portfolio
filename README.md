@@ -6,7 +6,9 @@ Welcome to my personal portfolio repository! This project serves as a comprehens
 
 ## 🚀 Overview
 
-This portfolio is designed to provide a seamless and engaging experience for visitors, especially recruiters. It highlights my expertise in full-stack development, cloud computing, and AI-driven solutions.
+This portfolio is designed to provide a seamless and engaging experience for visitors, especially recruiters. It highlights my expertise in full-stack development, cloud computing, 
+
+and AI-driven solutions.
 
 ## 🛠️ Tech Stack
 
